@@ -64,36 +64,39 @@ string search(string test, string in_test){
     posion+= to_string(judge);
     return posion;
 }
-int get_total_part(string test, int *p, int count){
+string get_total_part(string test, int *p, int count, string in_test){
     if(count== 0){
-        return 0;
+        return "";
     }else{
         cout<<"该语句存在于以下字符串中，请选择您想进行操作的语句后："<<endl;
     }
     int j= 0;
     string part1, part2;
+    string final_all= "";
     for(j=0; j<count; j++){
         if(p[j]-5> 0){
             part1= test.substr(p[j]-5, 5);
             if(p[j]+5< test.size()){
-                part2= test.substr(p[j], 5);
+                part2= test.substr(p[j]+in_test.size(), 5);
             }else{
-                part2= test.substr(p[j]);
+                part2= test.substr(p[j]+in_test.size());
             }
         }else{
             part1= test.substr(0, p[j]);
             if(p[j]+5< test.size()){
-                part2= test.substr(p[j], 5);
+                part2= test.substr(p[j]+in_test.size(), 5);
             }else{
-                part2= test.substr(p[j]);
+                part2= test.substr(p[j]+in_test.size());
             }
         }    
-        cout<<j+1<<"."<<"\033[31m"<<part1<<" "<<"\033[33m"<<part2<<"\033[0m"<<endl;    
+        //cout<<j+1<<"."<<"\033[31m"<<part1<<" "<<"\033[33m"<<part2<<"\033[0m"<<endl;
+        final_all+= (to_string(j+1)+ "."+ part1 +"("+in_test+")"+part2+ "\n");
     }
-    return count;
+    cout<<final_all;
+    return final_all;
 }
 string add(string test, string in_test, int *p, int count){
-    int judge= get_total_part(test, p, count);
+    int judge= get_total_part(test, p, count, in_test).size();
     if(judge== 0){
         cout<<"不存在";
         return test;
@@ -120,7 +123,7 @@ string add(string test, string in_test, int *p, int count){
     return end_test;
 }
 string re_move(string test, string in_test, int *p, int count){
-    int judge= get_total_part(test, p, count);
+    int judge= get_total_part(test, p, count, in_test).size();
     if(judge== 0){
         cout<<"不存在";
         return test;
