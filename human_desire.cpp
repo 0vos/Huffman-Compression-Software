@@ -64,91 +64,6 @@ string search(string test, string in_test){
     posion+= to_string(judge);
     return posion;
 }
-string get_total_part(string test, int *p, int count, string in_test){
-    if(count== 0){
-        return "";
-    }else{
-        cout<<"该语句存在于以下字符串中，请选择您想进行操作的语句后："<<endl;
-    }
-    int j= 0;
-    string part1, part2;
-    string final_all= "";
-    for(j=0; j<count; j++){
-        if(p[j]-5> 0){
-            part1= test.substr(p[j]-5, 5);
-            if(p[j]+5< test.size()){
-                part2= test.substr(p[j]+in_test.size(), 5);
-            }else{
-                part2= test.substr(p[j]+in_test.size());
-            }
-        }else{
-            part1= test.substr(0, p[j]);
-            if(p[j]+5< test.size()){
-                part2= test.substr(p[j]+in_test.size(), 5);
-            }else{
-                part2= test.substr(p[j]+in_test.size());
-            }
-        }    
-        //cout<<j+1<<"."<<"\033[31m"<<part1<<" "<<"\033[33m"<<part2<<"\033[0m"<<endl;
-        final_all+= (to_string(j+1)+ "."+ part1 +"("+in_test+")"+part2+ "\n");
-    }
-    cout<<final_all;
-    return final_all;
-}
-string add(string test, string in_test, int *p, int count){
-    int judge= get_total_part(test, p, count, in_test).size();
-    if(judge== 0){
-        cout<<"不存在";
-        return test;
-    }
-    cout<<"请输入增加的内容："<<endl;
-    string new_test;
-    cin>>new_test;
-    cout<<"请输入增加的位置："<<endl;
-    string number;
-    cin>>number;
-    for(int i= 0;i<number.size(); i++){
-        if(number[i]<47||number[i]>57){
-            cout<<"输入错误"<<endl;
-            return test;
-        }
-    }
-    if(stoi(number)>count){
-        cout<<"输入错误"<<endl;
-        return test;
-    }
-    string part1= test.substr(0, p[stoi(number)-1]);
-    string part2= test.substr(p[stoi(number)-1]);
-    string end_test= part1+new_test+part2;
-    return end_test;
-}
-string re_move(string test, string in_test, int *p, int count){
-    int judge= get_total_part(test, p, count, in_test).size();
-    if(judge== 0){
-        cout<<"不存在";
-        return test;
-    }
-    cout<<"请输入删除的位置："<<endl;
-    string number;
-    cin>>number;
-    for(int i= 0;i<number.size(); i++){
-        if(number[i]<47||number[i]>57){
-            cout<<"输入错误"<<endl;
-            return test;
-        }
-    }
-    if(stoi(number)>count){
-        cout<<"输入错误"<<endl;
-        return test;
-    }
-    string part1= test.substr(0, p[stoi(number)-1]);
-        //cout<<part1<<endl;
-    string part2= test.substr(p[stoi(number)-1]+in_test.size());
-        //cout<<part2<<endl;
-    string end_test= part1+part2;
-    return end_test;
-    
-}
 int count_num_of_same(string test, string in_test){
     int j=0, k=0;
     string posion= search(test, in_test);
@@ -180,15 +95,47 @@ void posion_of_number(int *p, string test, string in_test){
         j++;
     }
 }
-int main()
-{
-    string test= "abxabcabcaby";
-    string in_test= "abc";
-    //对位置进行切割，找到该字符串出现的所有位置
+string get_total_part(string test,  string in_test){
     int count= count_num_of_same(test, in_test);
     int *p= new int(count);
     posion_of_number(p, test, in_test);
-    cout<<"请输入想进行的操作1.查找 2.增加 3.删除 4.退出"<<endl;
+    if(count== 0){
+        return "";
+    }else{
+        cout<<"该语句存在于以下字符串中，请选择您想进行操作的语句后："<<endl;
+    }
+    int j= 0;
+    string part1, part2;
+    string final_all= "";
+    for(j=0; j<count; j++){
+        if(p[j]-5> 0){
+            part1= test.substr(p[j]-5, 5);
+            if(p[j]+5< test.size()){
+                part2= test.substr(p[j]+in_test.size(), 5);
+            }else{
+                part2= test.substr(p[j]+in_test.size());
+            }
+        }else{
+            part1= test.substr(0, p[j]);
+            if(p[j]+5< test.size()){
+                part2= test.substr(p[j]+in_test.size(), 5);
+            }else{
+                part2= test.substr(p[j]+in_test.size());
+            }
+        }    
+        //cout<<j+1<<"."<<"\033[31m"<<part1<<" "<<"\033[33m"<<part2<<"\033[0m"<<endl;
+        final_all+= (to_string(j+1)+ "."+ part1 +"("+in_test+")"+part2+ "\n");
+    }
+    cout<<final_all;
+    return final_all;
+}
+int main()
+{
+    string test= "adjasjdhaqabanqwqkejqkeabaadadad";
+    string in_test= "aba";
+    //对位置进行切割，找到该字符串出现的所有位置
+    
+    cout<<"请输入想进行的操作1.查找 2.退出"<<endl;
     string choice;
     cin>>choice;
     while(choice[0]!= '\0'){
@@ -199,24 +146,14 @@ int main()
             }else{
                 cout<<"不存在"<<endl;
             }
-        }else if(choice== "2"){
-            int count= count_num_of_same(test, in_test);
-            int *p= new int(count);
-            posion_of_number(p, test, in_test);
-            test= add(test, in_test, p, count);
-            cout<<test<<endl;
-        }else if(choice== "3"){
-            int count= count_num_of_same(test, in_test);
-            int *p= new int(count);
-            posion_of_number(p, test, in_test);
-            test= re_move(test, in_test, p, count);
-            cout<<"删除后的字符串为："<<test<<endl;
-        }else if(choice== "4"){
+            get_total_part(test, in_test);
+        }else if(choice=="2"){
             break;
-        }else{
+        }
+        else{
             cout<<"输入格式不对"<<endl;
         }
-        cout<<"请输入想进行的操作1.查找 2.增加 3.删除 4.退出"<<endl;
+        cout<<"请输入想进行的操作1.查找2.退出"<<endl;
         cin>>choice;
     }
     
