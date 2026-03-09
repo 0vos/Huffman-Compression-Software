@@ -1,26 +1,26 @@
 # Huffman Compression Software
-> 2024 Winter 数据结构课程设计
+> 2024 Winter Data Structure Course Design
 ```
-5、哈夫曼压缩软件设计
-【问题描述】
-采用哈夫曼树求得的用于通信的二进制编码称为哈夫曼编码。利用哈夫曼编码对文本或图像进行数据压缩，设计数据压缩软件。
-【设计要求】
-设计基于哈夫曼编码的文本和图像压缩软件。
-（1）采用静态链表的二叉树等数据结构。
-（2）可以随机、文件及人工输入数据。
-（3）创建哈夫曼树，生成哈夫曼编码和译码。
-（4）源码、编码和压缩后的信息均以文件形式保存。
-（5）可以查询和更新数据。
-（6）其它完善性或扩展性功能。
+5. Huffman Compression Software Design
+[Problem Description]
+The binary code used for communication obtained using a Huffman tree is called Huffman coding. Use Huffman coding to compress text or image data and design data compression software.
+[Design Requirements]
+Design a text and image compression software based on Huffman coding.
+(1) Uses data structures such as a binary tree with a static linked list.
+(2) Supports random, file, and manual input.
+(3) Create a Huffman tree, generate Huffman encoding and decoding.
+(4) Source data, encoding, and compressed information are saved as files.
+(5) Ability to query and update data.
+(6) Other extended functions.
 ```
-该项目实现了一个轻量级的C++哈夫曼压缩软件，具体来说是后端的哈夫曼算法和压缩文件生成，前端显示用户界面进行输入和展示操作
+This project implements a lightweight C++ Huffman compression software. Specifically, it includes the back-end Huffman algorithm and compressed file generation, alongside a front-end user interface for input and display operations.
 ## Quick Start
-- 运行server.cpp
-- 在浏览器中输入
+- Run `server.cpp`
+- Enter the following in your browser:
   ```
   localhost:8080
   ```
-### 🙋如果你有疑问
-请及时联系Qianqian，无论是什么问题。期待良好的合作
-### 为项目做贡献
-请提交修改内容或者新增加的内容到新的分支，不要直接修改主分支
+### 🙋 If you have any questions
+Please contact Qianqian promptly, regardless of what the problem is. Looking forward to good cooperation.
+### Contribute to the Project
+Please submit your modifications or additions to a new branch, rather than directly modifying the main branch.
